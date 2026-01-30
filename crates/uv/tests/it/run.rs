@@ -6232,9 +6232,8 @@ fn run_project_not_found() {
     ");
 }
 
-/// Using `--project` with a file path should warn (ignoring the eventual error).
+/// Using `--project` with a file path should error.
 #[test]
-#[cfg(unix)] // TODO(konsti): Currently this doesn't error on Windows, but the result will vanish with the hard error
 fn run_project_is_file() -> Result<()> {
     let context = TestContext::new("3.12");
 
@@ -6248,8 +6247,7 @@ fn run_project_is_file() -> Result<()> {
     ----- stdout -----
 
     ----- stderr -----
-    warning: Project path `not-a-directory` is not a directory. This will become an error in the future.
-    error: failed to open file `[TEMP_DIR]/not-a-directory/uv.toml`: Not a directory (os error 20)
+    error: Project path `not-a-directory` is not a directory
     ");
 
     Ok(())

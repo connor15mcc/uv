@@ -113,8 +113,8 @@ async fn run(mut cli: Cli) -> Result<ExitStatus> {
                     project_path.user_display()
                 );
             } else if !project_dir.is_dir() {
-                warn_user_once!(
-                    "Project path `{}` is not a directory. This will become an error in the future.",
+                bail!(
+                    "Project path `{}` is not a directory",
                     project_path.user_display()
                 );
             }
