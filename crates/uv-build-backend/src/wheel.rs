@@ -725,6 +725,7 @@ impl<W: Write + Seek> ZipDirectoryWriter<W> {
         // Set file permissions: 644 (rw-r--r--) for regular files, 755 (rwxr-xr-x) for executables
         let permissions = if executable_bit { 0o755 } else { 0o644 };
         let options = zip::write::SimpleFileOptions::default()
+            .system(zip::System::Unix)
             .unix_permissions(permissions)
             .compression_method(self.compression);
         self.writer.start_file(path, options)?;
